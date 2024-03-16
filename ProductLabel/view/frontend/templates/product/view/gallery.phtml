@@ -1,0 +1,106 @@
+<?php
+//get product label helper
+$productLabelHelper = $this->helper(Inventionstar\ProductLabel\Helper\ProductLabelHelper::class);
+$_product = $block->getProduct(); ?>
+<?php
+//if there is product label found then display label
+$productLabelType = $productLabelHelper->getProductLabelType($_product);
+if (!empty($productLabelType)) {
+    if ($productLabelType == 'text') {
+        $productLabel = $productLabelHelper->getProductLabel($_product);
+        $productLabelColor = $productLabelHelper->getProductLabelColor($_product);
+        $productLabelBackgroundColor = $productLabelHelper->getProductLabelBackgroundColor($_product);
+        $productLabelShape = $productLabelHelper->getProductLabelShape($_product);
+        if ($productLabel && $productLabelShape) { ?>
+            <span class="inventionstar-product-label"
+                <?= !empty($productLabelColor) ? 'data-color=' . /* @noEscape */
+                    $productLabelColor : ''; ?> <?= !empty($productLabelBackgroundColor) ? 'data-background-color=' . /* @noEscape */
+                $productLabelBackgroundColor : ''; ?> <?= !empty($productLabelShape) ? 'data-shape=' . /* @noEscape */
+                $productLabelShape : '' ?>>
+                    <?= $block->escapeHtml($productLabel); ?>
+                </span>
+        <?php }
+    } elseif ($productLabelType == 'image') {
+        $productLabelImage = $productLabelHelper->getProductLabelImage($_product);
+        if ($productLabelImage) { ?>
+            <div class="inventionstar-product-label-image">
+                <img src="<?= /* @noEscape */
+                $productLabelHelper->getProductMediaUrl() . $productLabelImage; ?>">
+            </div>
+        <?php }
+    }
+}
+?>
+<?php
+$images = $block->getGalleryImages()->getItems();
+$mainImage = current(array_filter($images, function ($img) use ($block) {
+    return $block->isMainImage($img);
+}));
+
+if (!empty($images) && empty($mainImage)) {
+    $mainImage = $block->getGalleryImages()->getFirstItem();
+}
+
+$helper = $block->getData('imageHelper');
+$mainImageData = $mainImage ?
+    $mainImage->getData('medium_image_url') :
+    $helper->getDefaultPlaceholderUrl('image');
+
+?>
+
+<div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+    <img
+        alt="main product photo"
+        class="gallery-placeholder__image"
+        src="<?= /* @noEscape */
+        $mainImageData ?>"
+    />
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-gallery-role=gallery-placeholder]": {
+            "mage/gallery/gallery": {
+                "mixins":["magnifier/magnify"],
+                "magnifierOpts": <?= /* @noEscape */
+                $block->getMagnifier() ?>,
+                "data": <?= /* @noEscape */
+                $block->getGalleryImagesJson() ?>,
+                "options": <?= /* @noEscape */
+                $block->getGalleryOptions()->getOptionsJson() ?>,
+                "fullscreen": <?= /* @noEscape */
+                $block->getGalleryOptions()->getFSOptionsJson() ?>,
+                 "breakpoints": <?= /* @noEscape */
+                    $block->getBreakpoints() ?>
+            }
+        }
+    }
+
+</script>
+
+<script>
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+            //loop through all the labels found
+            $('.inventionstar-product-label').each(function (index) {
+                //set default background color & font color
+                if ($(this).attr('data-background-color')) {
+                    $(this).css("background-color", $(this).attr('data-background-color'));
+                } else {
+                    $(this).css("background-color", '#ff0000');
+                }
+                if ($(this).attr('data-color')) {
+                    $(this).css("color", $(this).attr('data-color'));
+                } else {
+                    $(this).css("color", '#ffffff');
+                }
+
+                //assign css according to shapes found
+                if ($(this).attr('data-shape')) {
+                    $(this).addClass($(this).attr('data-shape'));
+                }
+            });
+        });
+    });
+</script>
+

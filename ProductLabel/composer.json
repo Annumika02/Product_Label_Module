@@ -1,0 +1,18 @@
+{
+    "name": "inventionstar/magento-2-product-label-extension",
+    "description": "Inventionstar Product Label Extension for Magento 2",
+    "type": "magento2-module",
+    "version": "1.3.1",
+    "license": "OSL-3.0",
+    "require": {
+        "php": "~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.0|~8.1|^8.2"
+    },
+    "autoload": {
+        "files": [
+        	"registration.php"
+        ],
+        "psr-4": {
+            "Inventionstar\\ProductLabel\\": ""
+        }
+    }
+}

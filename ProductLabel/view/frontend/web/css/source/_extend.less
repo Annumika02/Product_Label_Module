@@ -1,0 +1,87 @@
+.products-grid{
+    .product-item-info {
+        position: relative;
+        .inventionstar-product-label {
+            top: 0px;
+            right: 0px;
+            padding: 10px 25px;
+            word-wrap: break-word;
+        }
+        .inventionstar-product-label.rectangle {
+            position: absolute;
+            z-index: 2;
+        }
+        .inventionstar-product-label.oval {
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 2;
+        }
+        .inventionstar-product-label-image {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            z-index: 2;
+            width: 60px;
+        }
+        &:hover {
+            .inventionstar-product-label {
+                top: 9px;
+                right: 9px;
+            }
+            .inventionstar-product-label-image {
+                top: 9px;
+                right: 9px;
+            }
+        }
+    }
+}
+.product.media {
+    position: relative;
+    .inventionstar-product-label {
+        top: 0px;
+        right: 0px;
+        padding: 10px 25px;
+        word-wrap: break-word
+    }
+    .inventionstar-product-label-image {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        z-index: 1;
+        width: 80px;
+    }
+    .inventionstar-product-label.rectangle {
+        position: absolute;
+        z-index: 2;
+    }
+    .inventionstar-product-label.oval {
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        position: absolute;
+        z-index: 2;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .products-grid{
+        .product-item-info {
+            .inventionstar-product-label {
+                padding: 3px 15px;
+            }
+            .inventionstar-product-label-image {
+                width: 50px;
+            }
+        }
+    }
+    .product.media {
+        .inventionstar-product-label {
+            padding: 3px 15px;
+        }
+        .inventionstar-product-label-image {
+            width: 50px;
+        }
+    }
+}

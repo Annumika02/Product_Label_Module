@@ -1,0 +1,51 @@
+{
+    "inventionstar_product_label_rules": {
+        "column": {
+            "rule_id": true,
+            "name": true,
+            "is_active": true,
+            "product_label_select": true,
+            "product_label": true,
+            "product_label_background_color": true,
+            "product_label_color": true,
+            "product_label_shape": true,
+            "product_label_image": true,
+            "from_date": true,
+            "to_date": true,
+            "priority": true,
+            "conditions_serialized": true,
+            "creation_time": true,
+            "updation_time": true
+        },
+        "index": {
+            "INVENTIONSTAR_PRODUCT_LABEL_RULES_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "inventionstar_product_label_rules_store": {
+        "column": {
+            "product_label_rules_store_id": true,
+            "rule_id": true,
+            "store_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "INVENTIONSTAR_PRD_LBL_RULES_STORE_RULE_ID_INVENTIONSTAR_PRD_LBL_RULES_RULE_ID": true,
+            "INVENTIONSTAR_PRODUCT_LABEL_RULES_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "inventionstar_product_label_rules_customer_group": {
+        "column": {
+            "product_label_rules_customer_group_id": true,
+            "rule_id": true,
+            "customer_group_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_FC6DB0CF6760D4B893B2E3023FC7CDC5": true,
+            "FK_B3765232B7FE0C46210639CFDF223206": true
+        }
+    }
+}
